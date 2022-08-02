@@ -47,15 +47,15 @@ def main():
                 break
             continue
         if msg.error():
-            print("Consumer error: {}".format(msg.error()))
+            print(f"Consumer error: {msg.error()}")
             continue
         msgs.append(msg)
         last_poll_success = datetime.now()
-        print('Received message: {}'.format(msg.value().decode('utf-8')))
+        print(f"Received message: {msg.value().decode('utf-8')}")
 
     print(f"\n\n------------------------------------------------------------\n\nReceived a total of {len(msgs)} messages")
     c.close()
-    assert len(msgs) > 0, "Failed to assert that atleast a single package was received"
+    assert msgs, "Failed to assert that atleast a single package was received"
 
 if __name__ == '__main__':
     main()
